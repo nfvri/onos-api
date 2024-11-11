@@ -15,7 +15,7 @@ class CellType(betterproto.Enum):
 
 
 @dataclass(eq=False, repr=False)
-class Point(betterproto.Message):
+class Coordinate(betterproto.Message):
     lat: float = betterproto.double_field(1)
     lng: float = betterproto.double_field(2)
 
@@ -25,11 +25,11 @@ class Point(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class Sector(betterproto.Message):
-    azimuth: int = betterproto.int32_field(1)
-    arc: int = betterproto.int32_field(2)
-    centroid: "Point" = betterproto.message_field(3)
-    height: int = betterproto.int32_field(4)
-    tilt: int = betterproto.int32_field(5)
+    center: "Coordinate" = betterproto.message_field(1)
+    azimuth: float = betterproto.double_field(2)
+    arc: int = betterproto.int32_field(3)
+    tilt: float = betterproto.double_field(4)
+    height: int = betterproto.int32_field(5)
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -38,7 +38,7 @@ class Sector(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class Route(betterproto.Message):
     name: int = betterproto.uint64_field(1)
-    waypoints: List["Point"] = betterproto.message_field(2)
+    waypoints: List["Coordinate"] = betterproto.message_field(2)
     color: str = betterproto.string_field(3)
     speed_avg: int = betterproto.uint32_field(4)
     speed_stdev: int = betterproto.uint32_field(5)
@@ -52,23 +52,31 @@ class Route(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class Ue(betterproto.Message):
     imsi: int = betterproto.uint64_field(1)
-    type: str = betterproto.string_field(2)
-    position: "Point" = betterproto.message_field(4)
-    rotation: int = betterproto.uint32_field(5)
-    serving_tower: int = betterproto.uint64_field(7)
-    serving_tower_strength: float = betterproto.double_field(8)
-    tower1: int = betterproto.uint64_field(9)
-    tower1_strength: float = betterproto.double_field(10)
-    tower2: int = betterproto.uint64_field(11)
-    tower2_strength: float = betterproto.double_field(12)
-    tower3: int = betterproto.uint64_field(13)
-    tower3_strength: float = betterproto.double_field(14)
-    crnti: int = betterproto.uint32_field(15)
-    admitted: bool = betterproto.bool_field(16)
-    metrics: "UeMetrics" = betterproto.message_field(17)
-    rrc_state: int = betterproto.uint32_field(18)
-    five_qi: int = betterproto.int32_field(19)
-    ueid: "UeIdentity" = betterproto.message_field(20)
+    ueid: "UeIdentity" = betterproto.message_field(2)
+    type: str = betterproto.string_field(3)
+    rrc_state: int = betterproto.uint32_field(4)
+    location: "Coordinate" = betterproto.message_field(5)
+    heading: int = betterproto.uint32_field(6)
+    five_qi: int = betterproto.int32_field(7)
+    cell: "UeCell" = betterproto.message_field(8)
+    crnti: int = betterproto.uint32_field(9)
+    cells: List["UeCell"] = betterproto.message_field(10)
+    height: float = betterproto.double_field(11)
+    is_admitted: bool = betterproto.bool_field(12)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
+class UeCell(betterproto.Message):
+    id: int = betterproto.uint64_field(1)
+    ncgi: int = betterproto.uint64_field(2)
+    rsrp: float = betterproto.double_field(3)
+    rsrq: float = betterproto.double_field(4)
+    sinr: float = betterproto.double_field(5)
+    bwp_refs: List["Bwp"] = betterproto.message_field(6)
+    avail_prbs_dl: int = betterproto.uint32_field(7)
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -109,26 +117,65 @@ class UeMetrics(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class Cell(betterproto.Message):
-    ecgi: int = betterproto.uint64_field(1)
-    location: "Point" = betterproto.message_field(3)
-    sector: "Sector" = betterproto.message_field(4)
-    color: str = betterproto.string_field(5)
-    max_ues: int = betterproto.uint32_field(6)
-    neighbors: List[int] = betterproto.uint64_field(7)
-    # The cell transmit power in decibels
-    tx_power_db: float = betterproto.double_field(8)
-    measurement_params: "MeasurementParams" = betterproto.message_field(9)
-    # crntis maps a ue's name to its crnti
-    crnti_map: Dict[int, int] = betterproto.map_field(
-        10, betterproto.TYPE_UINT32, betterproto.TYPE_UINT64
+    cell_config: "CellConfig" = betterproto.message_field(1)
+    ncgi: int = betterproto.uint64_field(2)
+    color: str = betterproto.string_field(3)
+    max_ues: int = betterproto.uint32_field(4)
+    neighbors: List[int] = betterproto.uint64_field(5)
+    measurement_params: "MeasurementParams" = betterproto.message_field(6)
+    pci: int = betterproto.uint32_field(7)
+    earfcn: int = betterproto.uint32_field(8)
+    cell_type: "CellType" = betterproto.enum_field(9)
+    bwps: Dict[int, "Bwp"] = betterproto.map_field(
+        10, betterproto.TYPE_UINT64, betterproto.TYPE_MESSAGE
     )
-    crnti_index: int = betterproto.uint32_field(11)
-    port: int = betterproto.uint32_field(12)
-    pci: int = betterproto.uint32_field(13)
-    earfcn: int = betterproto.uint32_field(14)
-    cell_type: "CellType" = betterproto.enum_field(15)
-    rrc_idle_count: int = betterproto.uint32_field(16)
-    rrc_connected_count: int = betterproto.uint32_field(17)
+    rrc_idle_count: int = betterproto.uint32_field(11)
+    rrc_connected_count: int = betterproto.uint32_field(12)
+    cached: bool = betterproto.bool_field(13)
+    cached_states: Dict[str, "CellSignalInfo"] = betterproto.map_field(
+        14, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+    current_state_hash: str = betterproto.string_field(15)
+    resource_alloc_scheme: str = betterproto.string_field(16)
+    grid: "Grid" = betterproto.message_field(17)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
+class CellConfig(betterproto.Message):
+    tx_power_db: float = betterproto.double_field(1)
+    sector: "Sector" = betterproto.message_field(2)
+    channel: "Channel" = betterproto.message_field(3)
+    beam: "Beam" = betterproto.message_field(4)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
+class Channel(betterproto.Message):
+    ssb_frequency: int = betterproto.uint32_field(1)
+    arfcn_dl: int = betterproto.uint32_field(2)
+    arfcn_ul: int = betterproto.uint32_field(3)
+    environment: str = betterproto.string_field(4)
+    bs_channel_bw_dl: int = betterproto.uint32_field(5)
+    bs_channel_bw_ul: int = betterproto.uint32_field(6)
+    bs_channel_bw_sul: int = betterproto.uint32_field(7)
+    los: bool = betterproto.bool_field(8)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
+class Beam(betterproto.Message):
+    h3_db_angle: float = betterproto.double_field(1)
+    v3_db_angle: float = betterproto.double_field(2)
+    max_gain: float = betterproto.double_field(3)
+    max_attenuation_db: float = betterproto.double_field(4)
+    v_side_lobe_attenuation_db: float = betterproto.double_field(5)
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -159,6 +206,56 @@ class EventA3Params(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class Bwp(betterproto.Message):
+    id: int = betterproto.uint64_field(1)
+    scs: int = betterproto.int32_field(2)
+    number_of_rbs: int = betterproto.int32_field(3)
+    downlink: bool = betterproto.bool_field(4)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
+class CellSignalInfo(betterproto.Message):
+    rp_coverage_boundaries: List["CoverageBoundary"] = betterproto.message_field(1)
+    coverage_boundaries: List["CoverageBoundary"] = betterproto.message_field(2)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
+class CoverageBoundary(betterproto.Message):
+    ref_signal_strength: float = betterproto.double_field(1)
+    boundary_points: List["Coordinate"] = betterproto.message_field(2)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
+class Grid(betterproto.Message):
+    shadowing_map: List[float] = betterproto.double_field(1)
+    grid_points: List["Coordinate"] = betterproto.message_field(2)
+    bounding_box: "BoundingBox" = betterproto.message_field(3)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
+class BoundingBox(betterproto.Message):
+    min_lat: float = betterproto.double_field(1)
+    min_lng: float = betterproto.double_field(2)
+    max_lat: float = betterproto.double_field(3)
+    max_lng: float = betterproto.double_field(4)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
 class Node(betterproto.Message):
     enbid: int = betterproto.uint32_field(1)
     controllers: List[str] = betterproto.string_field(2)
@@ -173,7 +270,7 @@ class Node(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class MapLayout(betterproto.Message):
     # Map center latitude and longitude
-    center: "Point" = betterproto.message_field(1)
+    center: "Coordinate" = betterproto.message_field(1)
     # The starting Zoom level
     zoom: float = betterproto.float_field(2)
     # Show map as faded on start

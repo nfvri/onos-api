@@ -8,28 +8,29 @@ package onos.ransim.types;
 
 import "gogoproto/gogo.proto";
 
-message Point {
+message Coordinate {
     double lat = 1;
 
     double lng = 2;
 }
 
+
 message Sector {
-    int32 azimuth = 1;
+    Coordinate center = 1;
 
-    int32 arc = 2;
+    double azimuth = 2;
 
-    Point centroid = 3;
+    int32 arc = 3;
 
-    int32 height = 4;
-    
-    int32 tilt = 5;
+    double tilt = 4;
+
+    int32 height = 5;
 }
 
 message Route {
     uint64 name = 1 [(gogoproto.customname) = "RouteID", (gogoproto.casttype) = "IMSI"];
 
-    repeated Point waypoints = 2;
+    repeated Coordinate waypoints = 2;
 
     string color = 3;
 
@@ -44,40 +45,27 @@ message Route {
 
 message Ue {
     uint64 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "IMSI"];
+    UeIdentity ueid = 2;
+    string type = 3;
+    uint32 rrc_state = 4;
+    Coordinate location = 5;
+    uint32 heading = 6;
+    int32 five_qi = 7;
+    UECell cell = 8;
+    uint32 crnti = 9 [(gogoproto.customname) = "CRNTI", (gogoproto.casttype) = "CRNTI"];
+    repeated UECell cells = 10;
+    double height = 11;
+    bool is_admitted = 12;
+}
 
-    string type = 2;
-
-    Point position = 4;
-
-    uint32 rotation = 5;
-
-    uint64 serving_tower = 7 [(gogoproto.casttype) = "NCGI"];
-
-    double serving_tower_strength = 8;
-
-    uint64 tower1 = 9 [(gogoproto.casttype) = "NCGI"];
-
-    double tower1_strength = 10;
-
-    uint64 tower2 = 11 [(gogoproto.casttype) = "NCGI"];
-
-    double tower2_strength = 12;
-
-    uint64 tower3 = 13 [(gogoproto.casttype) = "NCGI"];
-
-    double tower3_strength = 14;
-
-    uint32 crnti = 15 [(gogoproto.customname) = "CRNTI", (gogoproto.casttype) = "CRNTI"];
-
-    bool admitted = 16;
-
-    UeMetrics metrics = 17;
-
-    uint32 rrc_state = 18;
-
-    int32 five_qi = 19;
-
-    UeIdentity ueid = 20;
+message UECell {
+    uint64 id = 1 [(gogoproto.customname) = "GnbID", (gogoproto.casttype) = "GnbID"];
+    uint64 ncgi = 2 [(gogoproto.casttype) = "NCGI"];
+    double rsrp = 3;
+    double rsrq = 4;
+    double sinr = 5;
+    repeated Bwp bwp_refs = 6;
+    uint32 avail_prbs_dl = 7;
 }
 
 message UeIdentity {
@@ -111,40 +99,52 @@ enum CellType {
 }
 
 message Cell {
-    uint64 ecgi = 1 [(gogoproto.customname) = "NCGI", (gogoproto.casttype) = "NCGI"];
+    CellConfig cell_config = 1;
+    uint64 ncgi = 2 [(gogoproto.customname) = "NCGI", (gogoproto.casttype) = "NCGI"];
+    string color = 3;
+    uint32 max_ues = 4 [(gogoproto.customname) = "MaxUEs"];
+    repeated uint64 neighbors = 5 [(gogoproto.casttype) = "NCGI"];
+    MeasurementParams measurement_params = 6;
+    uint32 pci = 7;
+    uint32 earfcn = 8;
+    CellType cell_type = 9;
+    map<uint64, Bwp> bwps = 10;
+    uint32 rrc_idle_count = 11;
+    uint32 rrc_connected_count = 12;
+    bool cached = 13;
+    map<string, CellSignalInfo> cached_states = 14;
+    string current_state_hash = 15;
+    string resource_alloc_scheme = 16;
+    Grid grid = 17;
+}
 
-    Point location = 3;
 
-    Sector sector = 4;
+message CellConfig {
+    double tx_power_db = 1 [(gogoproto.customname) = "TxPowerdB"];
+    Sector sector = 2;
+    Channel channel = 3;
+    Beam beam = 4;
+}
 
-    string color = 5;
 
-    uint32 max_ues = 6 [(gogoproto.customname) = "MaxUEs"];
 
-    repeated uint64 neighbors = 7 [(gogoproto.casttype) = "NCGI"];
+message Channel {
+    uint32 ssb_frequency = 1;
+    uint32 arfcn_dl = 2;
+    uint32 arfcn_ul = 3;
+    string environment = 4;
+    uint32 bs_channel_bw_dl = 5;
+    uint32 bs_channel_bw_ul = 6;
+    uint32 bs_channel_bw_sul = 7;
+    bool los = 8;
+}
 
-    // The cell transmit power in decibels
-    double tx_power_db = 8 [(gogoproto.customname) = "TxPowerdB"];
-
-    MeasurementParams measurement_params = 9;
-
-    // crntis maps a ue's name to its crnti
-    map<uint32, uint64> crnti_map = 10 [(gogoproto.castkey) = "CRNTI", (gogoproto.castvalue) = "IMSI"];
-
-    uint32 crnti_index = 11;
-
-    uint32 port = 12;
-
-    uint32 pci = 13;
-
-    uint32 earfcn = 14;
-
-    CellType cell_type = 15;
-
-    uint32 rrc_idle_count = 16;
-
-    uint32 rrc_connected_count = 17;
-
+message Beam {
+    double h3db_angle = 1;
+    double v3db_angle = 2;
+    double max_gain = 3;
+    double max_attenuation_db = 4;
+    double v_side_lobe_attenuation_db = 5;
 }
 
 message MeasurementParams {
@@ -167,6 +167,36 @@ message EventA3Params {
     bool report_on_leave = 2;
 }
 
+message Bwp {
+    uint64 id = 1;
+    int32 scs = 2;
+    int32 number_of_rbs = 3;
+    bool downlink = 4;
+}
+
+message CellSignalInfo {
+    repeated CoverageBoundary rp_coverage_boundaries = 1;
+    repeated CoverageBoundary coverage_boundaries = 2;
+}
+
+message CoverageBoundary {
+    double ref_signal_strength = 1;
+    repeated Coordinate boundary_points = 2;
+}
+
+message Grid {
+    repeated double shadowing_map = 1;
+    repeated Coordinate grid_points = 2;
+    BoundingBox bounding_box = 3;
+}
+
+message BoundingBox {
+    double min_lat = 1;
+    double min_lng = 2;
+    double max_lat = 3;
+    double max_lng = 4;
+}
+
 message Node {
     uint32 enbid = 1 [(gogoproto.customname) = "GnbID", (gogoproto.casttype) = "GnbID"];
 
@@ -181,7 +211,7 @@ message Node {
 
 message MapLayout {
     // Map center latitude and longitude
-    Point center = 1;
+    Coordinate center = 1;
 
     // The starting Zoom level
     float zoom = 2;

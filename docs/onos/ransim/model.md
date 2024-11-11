@@ -637,7 +637,7 @@ GetNodeResponse get a node response
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | imsi | [uint32](#uint32) |  |  |
-| location | [onos.ransim.types.Point](#onos-ransim-types-Point) |  |  |
+| location | [onos.ransim.types.Coordinate](#onos-ransim-types-Coordinate) |  |  |
 | heading | [uint32](#uint32) |  |  |
 
 

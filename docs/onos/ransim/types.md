@@ -4,17 +4,27 @@
 ## Table of Contents
 
 - [onos/ransim/types/types.proto](#onos_ransim_types_types-proto)
+    - [Beam](#onos-ransim-types-Beam)
+    - [BoundingBox](#onos-ransim-types-BoundingBox)
+    - [Bwp](#onos-ransim-types-Bwp)
     - [Cell](#onos-ransim-types-Cell)
-    - [Cell.CrntiMapEntry](#onos-ransim-types-Cell-CrntiMapEntry)
+    - [Cell.BwpsEntry](#onos-ransim-types-Cell-BwpsEntry)
+    - [Cell.CachedStatesEntry](#onos-ransim-types-Cell-CachedStatesEntry)
+    - [CellConfig](#onos-ransim-types-CellConfig)
+    - [CellSignalInfo](#onos-ransim-types-CellSignalInfo)
+    - [Channel](#onos-ransim-types-Channel)
+    - [Coordinate](#onos-ransim-types-Coordinate)
+    - [CoverageBoundary](#onos-ransim-types-CoverageBoundary)
     - [EventA3Params](#onos-ransim-types-EventA3Params)
+    - [Grid](#onos-ransim-types-Grid)
     - [Guami](#onos-ransim-types-Guami)
     - [MapLayout](#onos-ransim-types-MapLayout)
     - [MeasurementParams](#onos-ransim-types-MeasurementParams)
     - [MeasurementParams.NcellIndividualOffsetsEntry](#onos-ransim-types-MeasurementParams-NcellIndividualOffsetsEntry)
     - [Node](#onos-ransim-types-Node)
-    - [Point](#onos-ransim-types-Point)
     - [Route](#onos-ransim-types-Route)
     - [Sector](#onos-ransim-types-Sector)
+    - [UECell](#onos-ransim-types-UECell)
     - [Ue](#onos-ransim-types-Ue)
     - [UeIdentity](#onos-ransim-types-UeIdentity)
     - [UeMetrics](#onos-ransim-types-UeMetrics)
@@ -32,6 +42,61 @@
 
 
 
+<a name="onos-ransim-types-Beam"></a>
+
+### Beam
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| h3db_angle | [double](#double) |  |  |
+| v3db_angle | [double](#double) |  |  |
+| max_gain | [double](#double) |  |  |
+| max_attenuation_db | [double](#double) |  |  |
+| v_side_lobe_attenuation_db | [double](#double) |  |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-BoundingBox"></a>
+
+### BoundingBox
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| min_lat | [double](#double) |  |  |
+| min_lng | [double](#double) |  |  |
+| max_lat | [double](#double) |  |  |
+| max_lng | [double](#double) |  |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-Bwp"></a>
+
+### Bwp
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| scs | [int32](#int32) |  |  |
+| number_of_rbs | [int32](#int32) |  |  |
+| downlink | [bool](#bool) |  |  |
+
+
+
+
+
+
 <a name="onos-ransim-types-Cell"></a>
 
 ### Cell
@@ -40,38 +105,143 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ecgi | [uint64](#uint64) |  |  |
-| location | [Point](#onos-ransim-types-Point) |  |  |
-| sector | [Sector](#onos-ransim-types-Sector) |  |  |
+| cell_config | [CellConfig](#onos-ransim-types-CellConfig) |  |  |
+| ncgi | [uint64](#uint64) |  |  |
 | color | [string](#string) |  |  |
 | max_ues | [uint32](#uint32) |  |  |
 | neighbors | [uint64](#uint64) | repeated |  |
-| tx_power_db | [double](#double) |  | The cell transmit power in decibels |
 | measurement_params | [MeasurementParams](#onos-ransim-types-MeasurementParams) |  |  |
-| crnti_map | [Cell.CrntiMapEntry](#onos-ransim-types-Cell-CrntiMapEntry) | repeated | crntis maps a ue&#39;s name to its crnti |
-| crnti_index | [uint32](#uint32) |  |  |
-| port | [uint32](#uint32) |  |  |
 | pci | [uint32](#uint32) |  |  |
 | earfcn | [uint32](#uint32) |  |  |
 | cell_type | [CellType](#onos-ransim-types-CellType) |  |  |
+| bwps | [Cell.BwpsEntry](#onos-ransim-types-Cell-BwpsEntry) | repeated |  |
 | rrc_idle_count | [uint32](#uint32) |  |  |
 | rrc_connected_count | [uint32](#uint32) |  |  |
+| cached | [bool](#bool) |  |  |
+| cached_states | [Cell.CachedStatesEntry](#onos-ransim-types-Cell-CachedStatesEntry) | repeated |  |
+| current_state_hash | [string](#string) |  |  |
+| resource_alloc_scheme | [string](#string) |  |  |
+| grid | [Grid](#onos-ransim-types-Grid) |  |  |
 
 
 
 
 
 
-<a name="onos-ransim-types-Cell-CrntiMapEntry"></a>
+<a name="onos-ransim-types-Cell-BwpsEntry"></a>
 
-### Cell.CrntiMapEntry
+### Cell.BwpsEntry
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [uint32](#uint32) |  |  |
-| value | [uint64](#uint64) |  |  |
+| key | [uint64](#uint64) |  |  |
+| value | [Bwp](#onos-ransim-types-Bwp) |  |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-Cell-CachedStatesEntry"></a>
+
+### Cell.CachedStatesEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [CellSignalInfo](#onos-ransim-types-CellSignalInfo) |  |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-CellConfig"></a>
+
+### CellConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tx_power_db | [double](#double) |  |  |
+| sector | [Sector](#onos-ransim-types-Sector) |  |  |
+| channel | [Channel](#onos-ransim-types-Channel) |  |  |
+| beam | [Beam](#onos-ransim-types-Beam) |  |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-CellSignalInfo"></a>
+
+### CellSignalInfo
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| rp_coverage_boundaries | [CoverageBoundary](#onos-ransim-types-CoverageBoundary) | repeated |  |
+| coverage_boundaries | [CoverageBoundary](#onos-ransim-types-CoverageBoundary) | repeated |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-Channel"></a>
+
+### Channel
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ssb_frequency | [uint32](#uint32) |  |  |
+| arfcn_dl | [uint32](#uint32) |  |  |
+| arfcn_ul | [uint32](#uint32) |  |  |
+| environment | [string](#string) |  |  |
+| bs_channel_bw_dl | [uint32](#uint32) |  |  |
+| bs_channel_bw_ul | [uint32](#uint32) |  |  |
+| bs_channel_bw_sul | [uint32](#uint32) |  |  |
+| los | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-Coordinate"></a>
+
+### Coordinate
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| lat | [double](#double) |  |  |
+| lng | [double](#double) |  |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-CoverageBoundary"></a>
+
+### CoverageBoundary
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ref_signal_strength | [double](#double) |  |  |
+| boundary_points | [Coordinate](#onos-ransim-types-Coordinate) | repeated |  |
 
 
 
@@ -88,6 +258,23 @@
 | ----- | ---- | ----- | ----------- |
 | a3_offset | [int32](#int32) |  |  |
 | report_on_leave | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-Grid"></a>
+
+### Grid
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shadowing_map | [double](#double) | repeated |  |
+| grid_points | [Coordinate](#onos-ransim-types-Coordinate) | repeated |  |
+| bounding_box | [BoundingBox](#onos-ransim-types-BoundingBox) |  |  |
 
 
 
@@ -120,7 +307,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| center | [Point](#onos-ransim-types-Point) |  | Map center latitude and longitude |
+| center | [Coordinate](#onos-ransim-types-Coordinate) |  | Map center latitude and longitude |
 | zoom | [float](#float) |  | The starting Zoom level |
 | fade | [bool](#bool) |  | Show map as faded on start |
 | show_routes | [bool](#bool) |  | Show routes on start |
@@ -190,22 +377,6 @@
 
 
 
-<a name="onos-ransim-types-Point"></a>
-
-### Point
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| lat | [double](#double) |  |  |
-| lng | [double](#double) |  |  |
-
-
-
-
-
-
 <a name="onos-ransim-types-Route"></a>
 
 ### Route
@@ -215,7 +386,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [uint64](#uint64) |  |  |
-| waypoints | [Point](#onos-ransim-types-Point) | repeated |  |
+| waypoints | [Coordinate](#onos-ransim-types-Coordinate) | repeated |  |
 | color | [string](#string) |  |  |
 | speed_avg | [uint32](#uint32) |  |  |
 | speed_stdev | [uint32](#uint32) |  |  |
@@ -235,11 +406,32 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| azimuth | [int32](#int32) |  |  |
+| center | [Coordinate](#onos-ransim-types-Coordinate) |  |  |
+| azimuth | [double](#double) |  |  |
 | arc | [int32](#int32) |  |  |
-| centroid | [Point](#onos-ransim-types-Point) |  |  |
+| tilt | [double](#double) |  |  |
 | height | [int32](#int32) |  |  |
-| tilt | [int32](#int32) |  |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-UECell"></a>
+
+### UECell
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| ncgi | [uint64](#uint64) |  |  |
+| rsrp | [double](#double) |  |  |
+| rsrq | [double](#double) |  |  |
+| sinr | [double](#double) |  |  |
+| bwp_refs | [Bwp](#onos-ransim-types-Bwp) | repeated |  |
+| avail_prbs_dl | [uint32](#uint32) |  |  |
 
 
 
@@ -255,23 +447,17 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | imsi | [uint64](#uint64) |  |  |
-| type | [string](#string) |  |  |
-| position | [Point](#onos-ransim-types-Point) |  |  |
-| rotation | [uint32](#uint32) |  |  |
-| serving_tower | [uint64](#uint64) |  |  |
-| serving_tower_strength | [double](#double) |  |  |
-| tower1 | [uint64](#uint64) |  |  |
-| tower1_strength | [double](#double) |  |  |
-| tower2 | [uint64](#uint64) |  |  |
-| tower2_strength | [double](#double) |  |  |
-| tower3 | [uint64](#uint64) |  |  |
-| tower3_strength | [double](#double) |  |  |
-| crnti | [uint32](#uint32) |  |  |
-| admitted | [bool](#bool) |  |  |
-| metrics | [UeMetrics](#onos-ransim-types-UeMetrics) |  |  |
-| rrc_state | [uint32](#uint32) |  |  |
-| five_qi | [int32](#int32) |  |  |
 | ueid | [UeIdentity](#onos-ransim-types-UeIdentity) |  |  |
+| type | [string](#string) |  |  |
+| rrc_state | [uint32](#uint32) |  |  |
+| location | [Coordinate](#onos-ransim-types-Coordinate) |  |  |
+| heading | [uint32](#uint32) |  |  |
+| five_qi | [int32](#int32) |  |  |
+| cell | [UECell](#onos-ransim-types-UECell) |  |  |
+| crnti | [uint32](#uint32) |  |  |
+| cells | [UECell](#onos-ransim-types-UECell) | repeated |  |
+| height | [double](#double) |  |  |
+| is_admitted | [bool](#bool) |  |  |
 
 
 

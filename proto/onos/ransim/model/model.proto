@@ -262,7 +262,7 @@ message MoveToCellResponse {
 
 message MoveToLocationRequest {
     uint32 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.IMSI"];
-    ransim.types.Point location = 2;
+    ransim.types.Coordinate location = 2;
     uint32 heading = 3;
 }
 

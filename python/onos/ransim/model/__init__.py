@@ -427,7 +427,7 @@ class MoveToCellResponse(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class MoveToLocationRequest(betterproto.Message):
     imsi: int = betterproto.uint32_field(1)
-    location: "_types__.Point" = betterproto.message_field(2)
+    location: "_types__.Coordinate" = betterproto.message_field(2)
     heading: int = betterproto.uint32_field(3)
 
     def __post_init__(self) -> None:
@@ -810,7 +810,7 @@ class UeModelStub(betterproto.ServiceStub):
         )
 
     async def move_to_location(
-        self, *, imsi: int = 0, location: "_types__.Point" = None, heading: int = 0
+        self, *, imsi: int = 0, location: "_types__.Coordinate" = None, heading: int = 0
     ) -> "MoveToLocationResponse":
 
         request = MoveToLocationRequest()
