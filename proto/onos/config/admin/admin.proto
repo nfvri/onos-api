@@ -141,15 +141,15 @@ message ListModelsRequest {
 // RollbackRequest carries the index of the configuration change transaction to rollback.
 message RollbackRequest {
     // index of the transaction that should be rolled back
-    uint64 index = 1 [(gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/config/v2.Index"];
+    uint64 index = 1 [(gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/config/v2.Index"];
 }
 
 // RollbackResponse carries the response of the rollback operation
 message RollbackResponse {
     // ID of the rollback transaction
-    string id = 1 [(gogoproto.customname) = "ID", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/config/v2.TransactionID"];
+    string id = 1 [(gogoproto.customname) = "ID", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/config/v2.TransactionID"];
     // index of the rollback transaction
-    uint64 index = 2 [(gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/config/v2.Index"];
+    uint64 index = 2 [(gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/config/v2.Index"];
 }
 
 // ConfigAdminService provides means for enhanced interactions with the configuration subsystem.
@@ -320,10 +320,10 @@ service TransactionService {
 
 message GetTransactionRequest {
     // ID of transaction to get
-    string id = 1 [(gogoproto.customname) = "ID", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/config/v2.TransactionID"];
+    string id = 1 [(gogoproto.customname) = "ID", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/config/v2.TransactionID"];
 
     // index of transaction to get; leave 0 for lookup by ID; if specified takes precedence
-    uint64 index = 2 [(gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/config/v2.Index"];
+    uint64 index = 2 [(gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/config/v2.Index"];
 }
 
 message GetTransactionResponse {
@@ -338,7 +338,7 @@ message ListTransactionsResponse {
 }
 
 message WatchTransactionsRequest {
-    string id = 1 [(gogoproto.customname) = "ID", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/config/v2.TransactionID"];
+    string id = 1 [(gogoproto.customname) = "ID", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/config/v2.TransactionID"];
     bool noreplay = 2;
 }
 
@@ -364,7 +364,7 @@ service ConfigurationService {
 }
 
 message GetConfigurationRequest {
-    string configuration_id = 1 [(gogoproto.customname) = "ConfigurationID", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/config/v2.ConfigurationID"];
+    string configuration_id = 1 [(gogoproto.customname) = "ConfigurationID", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/config/v2.ConfigurationID"];
 }
 
 message GetConfigurationResponse {
@@ -379,7 +379,7 @@ message ListConfigurationsResponse {
 }
 
 message WatchConfigurationsRequest {
-    string configuration_id = 1 [(gogoproto.customname) = "ConfigurationID", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/config/v2.ConfigurationID"];
+    string configuration_id = 1 [(gogoproto.customname) = "ConfigurationID", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/config/v2.ConfigurationID"];
     bool noreplay = 2;
 }
 

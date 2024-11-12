@@ -54,7 +54,7 @@ message PlmnIDRequest {
 }
 
 message PlmnIDResponse {
-    uint32 plmnid = 1 [(gogoproto.customname) = "PlmnID", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.PlmnID"];
+    uint32 plmnid = 1 [(gogoproto.customname) = "PlmnID", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.PlmnID"];
 }
 
 
@@ -69,7 +69,7 @@ message CreateNodeResponse {
 
 // GetNodeRequest get a node request
 message GetNodeRequest {
-    uint64 enbid = 1 [(gogoproto.customname) = "GnbID", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.GnbID"];
+    uint64 enbid = 1 [(gogoproto.customname) = "GnbID", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.GnbID"];
 }
 
 // GetNodeResponse get a node response
@@ -88,7 +88,7 @@ message UpdateNodeResponse {
 
 // DeleteNodeRequest delete a node request
 message DeleteNodeRequest {
-    uint64 enbid = 1 [(gogoproto.customname) = "GnbID", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.GnbID"];
+    uint64 enbid = 1 [(gogoproto.customname) = "GnbID", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.GnbID"];
 }
 
 // DeleteNodeResponse delete a node response
@@ -113,7 +113,7 @@ message WatchNodesResponse {
 }
 
 message AgentControlRequest {
-    uint64 enbid = 1 [(gogoproto.customname) = "GnbID", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.GnbID"];
+    uint64 enbid = 1 [(gogoproto.customname) = "GnbID", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.GnbID"];
 
     string command = 2; // start, stop, drop, reconnect, etc.
 
@@ -144,7 +144,7 @@ message CreateCellResponse {
 }
 
 message GetCellRequest {
-    uint64 ecgi = 1 [(gogoproto.customname) = "NCGI", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.NCGI"];
+    uint64 ecgi = 1 [(gogoproto.customname) = "NCGI", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.NCGI"];
 }
 
 message GetCellResponse {
@@ -159,7 +159,7 @@ message UpdateCellResponse {
 }
 
 message DeleteCellRequest {
-    uint64 enbid = 1 [(gogoproto.customname) = "NCGI", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.NCGI"];
+    uint64 enbid = 1 [(gogoproto.customname) = "NCGI", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.NCGI"];
 }
 
 message DeleteCellResponse {
@@ -200,7 +200,7 @@ message CreateRouteResponse {
 }
 
 message GetRouteRequest {
-    uint32 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.IMSI"];
+    uint32 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.IMSI"];
 }
 
 message GetRouteResponse {
@@ -208,7 +208,7 @@ message GetRouteResponse {
 }
 
 message DeleteRouteRequest {
-    uint64 enbid = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.IMSI"];
+    uint64 enbid = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.IMSI"];
 }
 
 message DeleteRouteResponse {
@@ -245,7 +245,7 @@ service UEModel {
 }
 
 message GetUERequest {
-    uint32 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.IMSI"];
+    uint32 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.IMSI"];
 }
 
 message GetUEResponse {
@@ -253,15 +253,15 @@ message GetUEResponse {
 }
 
 message MoveToCellRequest {
-    uint32 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.IMSI"];
-    uint32 ecgi = 2 [(gogoproto.customname) = "NCGI", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.NCGI"];
+    uint32 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.IMSI"];
+    uint32 ecgi = 2 [(gogoproto.customname) = "NCGI", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.NCGI"];
 }
 
 message MoveToCellResponse {
 }
 
 message MoveToLocationRequest {
-    uint32 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.IMSI"];
+    uint32 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.IMSI"];
     ransim.types.Coordinate location = 2;
     uint32 heading = 3;
 }
@@ -270,7 +270,7 @@ message MoveToLocationResponse {
 }
 
 message DeleteUERequest {
-    uint32 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/onosproject/onos-api/go/onos/ransim/types.IMSI"];
+    uint32 imsi = 1 [(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "github.com/nfvri/onos-api/go/onos/ransim/types.IMSI"];
 }
 
 message DeleteUEResponse {

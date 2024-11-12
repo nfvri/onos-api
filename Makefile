@@ -16,7 +16,7 @@ build: # @HELP compile Golang sources
 
 test: # @HELP run the unit tests and source code validation
 test: build lint license
-	cd go && go test -race github.com/onosproject/onos-api/go/...
+	cd go && go test -race github.com/nfvri/onos-api/go/...
 
 lint: # @HELP examines all source code and report coding problems
 	cd ./go; \

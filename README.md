@@ -19,12 +19,12 @@ The proto files are compiled and processed via `build/bin/compile-protos.sh` scr
 ## Golang
 The `go` source tree holds the automatically-generated `.pb.go` artifacts and also any manually authored `.go` source files written in support of the Golang bindings. To minimize the churn and to exercise tighter control over versioning, the generated files are also versioned and maintained in the SCM repo.
 
-The root package of the module is `github.com/onosproject/onos-api/go/onos`, with subpackages being named after each of the platform subsystems, mirroring the structure of the `proto` packages. Golang projects that wish to import µONOS API packages should include the following in the requirements section of their `go.mod` file:
+The root package of the module is `github.com/nfvri/onos-api/go/onos`, with subpackages being named after each of the platform subsystems, mirroring the structure of the `proto` packages. Golang projects that wish to import µONOS API packages should include the following in the requirements section of their `go.mod` file:
 
 ```go
 require (
   ...
-	github.com/onosproject/onos-api/go v0.6.1
+	github.com/nfvri/onos-api/go v0.6.1
   ...
 )
 
@@ -33,7 +33,7 @@ require (
 Additionally, Go bindings are generated with mocks for testing with [gomock]. Mocks of Protobuf interfaces can be constructed via the same package as the interfaces they mock:
 
 ```go
-import topoapi "github.com/onosproject/onos-api/go/onos/topo"
+import topoapi "github.com/nfvri/onos-api/go/onos/topo"
 ...
 mockClient := topoapi.NewMockTopoClient(ctrl)
 ```

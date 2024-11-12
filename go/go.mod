@@ -1,4 +1,4 @@
-module github.com/onosproject/onos-api/go
+module github.com/nfvri/onos-api/go
 
 go 1.19
 

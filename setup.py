@@ -37,8 +37,8 @@ setup(
     package_data={"onos_api": ["py.typed"]},
     keywords=["onos-api", "python", "protobuf", "gnmi"],
     license="Apache License v2.0",
-    url="https://github.com/onosproject/onos-api/",
-    download_url="https://github.com/onosproject/onos-api/",
+    url="https://github.com/nfvri/onos-api/",
+    download_url="https://github.com/nfvri/onos-api/",
     classifiers=[
         "Development Status :: 4 - Beta",
         "Environment :: Other Environment",
