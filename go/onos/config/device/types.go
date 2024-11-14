@@ -6,8 +6,9 @@ package device
 
 import (
 	"fmt"
-	types "github.com/onosproject/onos-api/go/onos/config"
 	"strings"
+
+	types "github.com/nfvri/onos-api/go/onos/config"
 )
 
 const separator = ":"

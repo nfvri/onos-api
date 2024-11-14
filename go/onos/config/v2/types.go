@@ -8,7 +8,7 @@ import (
 	"fmt"
 
 	"github.com/google/uuid"
-	types "github.com/onosproject/onos-api/go/onos/config"
+	types "github.com/nfvri/onos-api/go/onos/config"
 
 	"strings"
 )

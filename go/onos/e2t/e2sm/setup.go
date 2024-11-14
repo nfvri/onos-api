@@ -5,7 +5,7 @@
 package types
 
 import (
-	topoapi "github.com/onosproject/onos-api/go/onos/topo"
+	topoapi "github.com/nfvri/onos-api/go/onos/topo"
 )
 
 // OnSetupRequest on E2 setup request
