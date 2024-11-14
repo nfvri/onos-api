@@ -99,7 +99,7 @@ message ListNodesRequest {
 }
 
 message ListNodesResponse {
-    repeated ransim.types.Node nodes = 1;
+    ransim.types.Node node = 1;
 }
 
 message WatchNodesRequest {
@@ -179,7 +179,7 @@ message ListCellsRequest {
 }
 
 message ListCellsResponse {
-    repeated ransim.types.Cell Cells = 1;
+    ransim.types.Cell Cell = 1;
 }
 
 
@@ -228,7 +228,7 @@ message ListRoutesRequest {
 }
 
 message ListRoutesResponse {
-    repeated ransim.types.Route routes = 1;
+    ransim.types.Route route = 1;
 }
 
 // UEModel provides means to simulate mobile UEs.
@@ -290,7 +290,7 @@ message ListUEsRequest {
 }
 
 message ListUEsResponse {
-    repeated ransim.types.Ue ues = 1;
+    ransim.types.Ue ue = 1;
 }
 
 message GetUECountRequest {

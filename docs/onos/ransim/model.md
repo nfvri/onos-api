@@ -494,7 +494,7 @@ GetNodeResponse get a node response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| Cells | [onos.ransim.types.Cell](#onos-ransim-types-Cell) | repeated |  |
+| Cell | [onos.ransim.types.Cell](#onos-ransim-types-Cell) |  |  |
 
 
 
@@ -519,7 +519,7 @@ GetNodeResponse get a node response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| nodes | [onos.ransim.types.Node](#onos-ransim-types-Node) | repeated |  |
+| node | [onos.ransim.types.Node](#onos-ransim-types-Node) |  |  |
 
 
 
@@ -544,7 +544,7 @@ GetNodeResponse get a node response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| routes | [onos.ransim.types.Route](#onos-ransim-types-Route) | repeated |  |
+| route | [onos.ransim.types.Route](#onos-ransim-types-Route) |  |  |
 
 
 
@@ -569,7 +569,7 @@ GetNodeResponse get a node response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ues | [onos.ransim.types.Ue](#onos-ransim-types-Ue) | repeated |  |
+| ue | [onos.ransim.types.Ue](#onos-ransim-types-Ue) |  |  |
 
 
 
