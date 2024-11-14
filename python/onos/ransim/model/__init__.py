@@ -169,7 +169,7 @@ class ListNodesRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class ListNodesResponse(betterproto.Message):
-    node: "_types__.Node" = betterproto.message_field(1)
+    nodes: List["_types__.Node"] = betterproto.message_field(1)
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -303,7 +303,7 @@ class ListCellsRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class ListCellsResponse(betterproto.Message):
-    cell: "_types__.Cell" = betterproto.message_field(1)
+    cells: List["_types__.Cell"] = betterproto.message_field(1)
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -385,7 +385,7 @@ class ListRoutesRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class ListRoutesResponse(betterproto.Message):
-    route: "_types__.Route" = betterproto.message_field(1)
+    routes: List["_types__.Route"] = betterproto.message_field(1)
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -486,7 +486,7 @@ class ListUEsRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class ListUEsResponse(betterproto.Message):
-    ue: "_types__.Ue" = betterproto.message_field(1)
+    ues: List["_types__.Ue"] = betterproto.message_field(1)
 
     def __post_init__(self) -> None:
         super().__post_init__()
