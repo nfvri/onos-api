@@ -19,10 +19,10 @@ protoc --proto_path=$proto_path \
     proto/onos/misc/misc.proto
 
 # topo & uenib
-protoc --proto_path=$proto_path \
-    --doc_out=docs/onos/topo \
-    --doc_opt=markdown,topo.md \
-    proto/onos/topo/topo.proto
+# protoc --proto_path=$proto_path \
+#     --doc_out=docs/onos/topo \
+#     --doc_opt=markdown,topo.md \
+#     proto/onos/topo/topo.proto
 protoc --proto_path=$proto_path \
     --doc_out=docs/onos/uenib \
     --doc_opt=markdown,uenib.md \
@@ -191,9 +191,9 @@ protoc --proto_path=$proto_path \
     proto/onos/misc/*.proto
 
 # topo and UE-NIB
-protoc --proto_path=$proto_path \
-    --gogofaster_out=$go_import_paths,import_path=onos/topo,plugins=grpc:./go \
-    proto/onos/topo/*.proto
+# protoc --proto_path=$proto_path \
+#     --gogofaster_out=$go_import_paths,import_path=onos/topo,plugins=grpc:./go \
+#     proto/onos/topo/*.proto
 protoc --proto_path=$proto_path \
     --gogofaster_out=$go_import_paths,import_path=onos/uenib,plugins=grpc:./go \
     proto/onos/uenib/*.proto
@@ -326,10 +326,10 @@ protoc --proto_path=$proto_path \
     --include_imports \
     proto/onos/misc/*.proto
 
-protoc --proto_path=$proto_path \
-    --descriptor_set_out=protoset/onos-topo.protoset \
-    --include_imports \
-    proto/onos/topo/*.proto
+# protoc --proto_path=$proto_path \
+#     --descriptor_set_out=protoset/onos-topo.protoset \
+#     --include_imports \
+#     proto/onos/topo/*.proto
 protoc --proto_path=$proto_path \
     --descriptor_set_out=protoset/onos-uenib.protoset \
     --include_imports \
