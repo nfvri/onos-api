@@ -8,12 +8,14 @@ package onos.ransim.model;
 
 import "gogoproto/gogo.proto";
 import "onos/ransim/types/types.proto";
+import "google/protobuf/timestamp.proto";
 
 
 // ModelService provides means to clear and load node and cell model in bulk
 service ModelService {
     rpc Load(LoadRequest) returns (LoadResponse);
     rpc Clear(ClearRequest) returns (ClearResponse);
+    rpc GetModelInfo(ModelInfoRequest) returns (ModelInfoResponse);
 }
 
 message DataSet {
@@ -34,6 +36,14 @@ message ClearRequest {
 }
 
 message ClearResponse {
+}
+
+message ModelInfoRequest {    
+}
+
+message ModelInfoResponse {
+    string snapshotID = 1;
+    google.protobuf.Timestamp creationTimestamp = 2 [(gogoproto.stdtime) = true, (gogoproto.nullable) = false];
 }
 
 

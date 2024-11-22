@@ -2,6 +2,7 @@
 # sources: onos/ransim/model/model.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
+from datetime import datetime
 from typing import AsyncIterator, List, Optional
 
 import betterproto
@@ -58,6 +59,23 @@ class ClearRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class ClearResponse(betterproto.Message):
     pass
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
+class ModelInfoRequest(betterproto.Message):
+    pass
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
+class ModelInfoResponse(betterproto.Message):
+    snapshot_id: str = betterproto.string_field(1)
+    creation_timestamp: datetime = betterproto.message_field(2)
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -550,6 +568,14 @@ class ModelServiceStub(betterproto.ServiceStub):
 
         return await self._unary_unary(
             "/onos.ransim.model.ModelService/Clear", request, ClearResponse
+        )
+
+    async def get_model_info(self) -> "ModelInfoResponse":
+
+        request = ModelInfoRequest()
+
+        return await self._unary_unary(
+            "/onos.ransim.model.ModelService/GetModelInfo", request, ModelInfoResponse
         )
 
 

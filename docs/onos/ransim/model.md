@@ -43,6 +43,8 @@
     - [ListUEsResponse](#onos-ransim-model-ListUEsResponse)
     - [LoadRequest](#onos-ransim-model-LoadRequest)
     - [LoadResponse](#onos-ransim-model-LoadResponse)
+    - [ModelInfoRequest](#onos-ransim-model-ModelInfoRequest)
+    - [ModelInfoResponse](#onos-ransim-model-ModelInfoResponse)
     - [MoveToCellRequest](#onos-ransim-model-MoveToCellRequest)
     - [MoveToCellResponse](#onos-ransim-model-MoveToCellResponse)
     - [MoveToLocationRequest](#onos-ransim-model-MoveToLocationRequest)
@@ -602,6 +604,32 @@ GetNodeResponse get a node response
 
 
 
+<a name="onos-ransim-model-ModelInfoRequest"></a>
+
+### ModelInfoRequest
+
+
+
+
+
+
+
+<a name="onos-ransim-model-ModelInfoResponse"></a>
+
+### ModelInfoResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| snapshotID | [string](#string) |  |  |
+| creationTimestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+
+
+
+
+
+
 <a name="onos-ransim-model-MoveToCellRequest"></a>
 
 ### MoveToCellRequest
@@ -927,6 +955,7 @@ ModelService provides means to clear and load node and cell model in bulk
 | ----------- | ------------ | ------------- | ------------|
 | Load | [LoadRequest](#onos-ransim-model-LoadRequest) | [LoadResponse](#onos-ransim-model-LoadResponse) |  |
 | Clear | [ClearRequest](#onos-ransim-model-ClearRequest) | [ClearResponse](#onos-ransim-model-ClearResponse) |  |
+| GetModelInfo | [ModelInfoRequest](#onos-ransim-model-ModelInfoRequest) | [ModelInfoResponse](#onos-ransim-model-ModelInfoResponse) |  |
 
 
 <a name="onos-ransim-model-NodeModel"></a>
