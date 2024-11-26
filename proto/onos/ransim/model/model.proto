@@ -143,6 +143,7 @@ service CellModel {
     rpc GetCell(GetCellRequest) returns (GetCellResponse);
     rpc WatchCells(WatchCellsRequest) returns (stream WatchCellsResponse);
     rpc ListCells(ListCellsRequest) returns (stream ListCellsResponse);
+    rpc ListPatchedCells(ListPatchedCellsRequest) returns (stream ListCellsResponse);
 }
 
 
@@ -184,6 +185,10 @@ message WatchCellsResponse {
     ransim.types.Cell cell = 1;
     EventType type = 2;
 }
+
+message ListPatchedCellsRequest {
+}
+
 
 message ListCellsRequest {
 }
@@ -241,6 +246,7 @@ message ListRoutesResponse {
     ransim.types.Route route = 1;
 }
 
+
 // UEModel provides means to simulate mobile UEs.
 service UEModel {
     rpc GetUE(GetUERequest) returns (GetUEResponse);
@@ -249,6 +255,7 @@ service UEModel {
     rpc DeleteUE(DeleteUERequest) returns (DeleteUEResponse);
     rpc WatchUEs(WatchUEsRequest) returns (stream WatchUEsResponse);
     rpc ListUEs(ListUEsRequest) returns (stream ListUEsResponse);
+    rpc ListPatchedUEs(ListPatchedUEsRequest) returns (stream ListUEsResponse);
 
     rpc GetUECount(GetUECountRequest) returns (GetUECountResponse);
     rpc SetUECount(SetUECountRequest) returns (SetUECountResponse);
@@ -294,6 +301,9 @@ message WatchUEsRequest {
 message WatchUEsResponse {
     ransim.types.Ue ue = 1;
     EventType type = 2;
+}
+
+message ListPatchedUEsRequest {
 }
 
 message ListUEsRequest {

@@ -312,6 +312,14 @@ class WatchCellsResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class ListPatchedCellsRequest(betterproto.Message):
+    pass
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
 class ListCellsRequest(betterproto.Message):
     pass
 
@@ -489,6 +497,14 @@ class WatchUEsRequest(betterproto.Message):
 class WatchUEsResponse(betterproto.Message):
     ue: "_types__.Ue" = betterproto.message_field(1)
     type: "EventType" = betterproto.enum_field(2)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+
+
+@dataclass(eq=False, repr=False)
+class ListPatchedUEsRequest(betterproto.Message):
+    pass
 
     def __post_init__(self) -> None:
         super().__post_init__()
@@ -748,6 +764,17 @@ class CellModelStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def list_patched_cells(self) -> AsyncIterator["ListCellsResponse"]:
+
+        request = ListPatchedCellsRequest()
+
+        async for response in self._unary_stream(
+            "/onos.ransim.model.CellModel/ListPatchedCells",
+            request,
+            ListCellsResponse,
+        ):
+            yield response
+
 
 class RouteModelStub(betterproto.ServiceStub):
     """
@@ -878,6 +905,17 @@ class UeModelStub(betterproto.ServiceStub):
 
         async for response in self._unary_stream(
             "/onos.ransim.model.UEModel/ListUEs",
+            request,
+            ListUEsResponse,
+        ):
+            yield response
+
+    async def list_patched_u_es(self) -> AsyncIterator["ListUEsResponse"]:
+
+        request = ListPatchedUEsRequest()
+
+        async for response in self._unary_stream(
+            "/onos.ransim.model.UEModel/ListPatchedUEs",
             request,
             ListUEsResponse,
         ):

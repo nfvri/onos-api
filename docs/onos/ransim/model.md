@@ -37,6 +37,8 @@
     - [ListCellsResponse](#onos-ransim-model-ListCellsResponse)
     - [ListNodesRequest](#onos-ransim-model-ListNodesRequest)
     - [ListNodesResponse](#onos-ransim-model-ListNodesResponse)
+    - [ListPatchedCellsRequest](#onos-ransim-model-ListPatchedCellsRequest)
+    - [ListPatchedUEsRequest](#onos-ransim-model-ListPatchedUEsRequest)
     - [ListRoutesRequest](#onos-ransim-model-ListRoutesRequest)
     - [ListRoutesResponse](#onos-ransim-model-ListRoutesResponse)
     - [ListUEsRequest](#onos-ransim-model-ListUEsRequest)
@@ -528,6 +530,26 @@ GetNodeResponse get a node response
 
 
 
+<a name="onos-ransim-model-ListPatchedCellsRequest"></a>
+
+### ListPatchedCellsRequest
+
+
+
+
+
+
+
+<a name="onos-ransim-model-ListPatchedUEsRequest"></a>
+
+### ListPatchedUEsRequest
+
+
+
+
+
+
+
 <a name="onos-ransim-model-ListRoutesRequest"></a>
 
 ### ListRoutesRequest
@@ -944,6 +966,7 @@ CellModel provides means to create, delete and read simulated RAN cells.
 | GetCell | [GetCellRequest](#onos-ransim-model-GetCellRequest) | [GetCellResponse](#onos-ransim-model-GetCellResponse) |  |
 | WatchCells | [WatchCellsRequest](#onos-ransim-model-WatchCellsRequest) | [WatchCellsResponse](#onos-ransim-model-WatchCellsResponse) stream |  |
 | ListCells | [ListCellsRequest](#onos-ransim-model-ListCellsRequest) | [ListCellsResponse](#onos-ransim-model-ListCellsResponse) stream |  |
+| ListPatchedCells | [ListPatchedCellsRequest](#onos-ransim-model-ListPatchedCellsRequest) | [ListCellsResponse](#onos-ransim-model-ListCellsResponse) stream |  |
 
 
 <a name="onos-ransim-model-ModelService"></a>
@@ -1002,6 +1025,7 @@ UEModel provides means to simulate mobile UEs.
 | DeleteUE | [DeleteUERequest](#onos-ransim-model-DeleteUERequest) | [DeleteUEResponse](#onos-ransim-model-DeleteUEResponse) |  |
 | WatchUEs | [WatchUEsRequest](#onos-ransim-model-WatchUEsRequest) | [WatchUEsResponse](#onos-ransim-model-WatchUEsResponse) stream |  |
 | ListUEs | [ListUEsRequest](#onos-ransim-model-ListUEsRequest) | [ListUEsResponse](#onos-ransim-model-ListUEsResponse) stream |  |
+| ListPatchedUEs | [ListPatchedUEsRequest](#onos-ransim-model-ListPatchedUEsRequest) | [ListUEsResponse](#onos-ransim-model-ListUEsResponse) stream |  |
 | GetUECount | [GetUECountRequest](#onos-ransim-model-GetUECountRequest) | [GetUECountResponse](#onos-ransim-model-GetUECountResponse) |  |
 | SetUECount | [SetUECountRequest](#onos-ransim-model-SetUECountRequest) | [SetUECountResponse](#onos-ransim-model-SetUECountResponse) |  |
 
