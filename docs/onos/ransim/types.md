@@ -453,9 +453,9 @@
 | location | [Coordinate](#onos-ransim-types-Coordinate) |  |  |
 | heading | [uint32](#uint32) |  |  |
 | five_qi | [int32](#int32) |  |  |
-| cell | [UECell](#onos-ransim-types-UECell) |  |  |
+| serving_cells | [UECell](#onos-ransim-types-UECell) | repeated |  |
 | crnti | [uint32](#uint32) |  |  |
-| cells | [UECell](#onos-ransim-types-UECell) | repeated |  |
+| neighbor_cells | [UECell](#onos-ransim-types-UECell) | repeated |  |
 | height | [double](#double) |  |  |
 | is_admitted | [bool](#bool) |  |  |
 

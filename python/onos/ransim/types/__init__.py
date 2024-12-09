@@ -58,9 +58,9 @@ class Ue(betterproto.Message):
     location: "Coordinate" = betterproto.message_field(5)
     heading: int = betterproto.uint32_field(6)
     five_qi: int = betterproto.int32_field(7)
-    cell: "UeCell" = betterproto.message_field(8)
+    serving_cells: List["UeCell"] = betterproto.message_field(8)
     crnti: int = betterproto.uint32_field(9)
-    cells: List["UeCell"] = betterproto.message_field(10)
+    neighbor_cells: List["UeCell"] = betterproto.message_field(10)
     height: float = betterproto.double_field(11)
     is_admitted: bool = betterproto.bool_field(12)
 

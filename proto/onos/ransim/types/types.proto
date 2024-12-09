@@ -51,9 +51,9 @@ message Ue {
     Coordinate location = 5;
     uint32 heading = 6;
     int32 five_qi = 7;
-    UECell cell = 8;
+    repeated UECell serving_cells = 8;
     uint32 crnti = 9 [(gogoproto.customname) = "CRNTI", (gogoproto.casttype) = "CRNTI"];
-    repeated UECell cells = 10;
+    repeated UECell neighbor_cells = 10;
     double height = 11;
     bool is_admitted = 12;
 }
