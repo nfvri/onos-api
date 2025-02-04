@@ -5,25 +5,31 @@
 
 - [onos/ransim/types/types.proto](#onos_ransim_types_types-proto)
     - [Beam](#onos-ransim-types-Beam)
+    - [BeamCoverageEntry](#onos-ransim-types-BeamCoverageEntry)
+    - [BeamID](#onos-ransim-types-BeamID)
     - [BoundingBox](#onos-ransim-types-BoundingBox)
+    - [BoundingBoxEntry](#onos-ransim-types-BoundingBoxEntry)
     - [Bwp](#onos-ransim-types-Bwp)
+    - [Carrier](#onos-ransim-types-Carrier)
     - [Cell](#onos-ransim-types-Cell)
     - [Cell.BwpsEntry](#onos-ransim-types-Cell-BwpsEntry)
     - [Cell.CachedStatesEntry](#onos-ransim-types-Cell-CachedStatesEntry)
     - [CellConfig](#onos-ransim-types-CellConfig)
-    - [CellSignalInfo](#onos-ransim-types-CellSignalInfo)
+    - [CellCoverageInfo](#onos-ransim-types-CellCoverageInfo)
     - [Channel](#onos-ransim-types-Channel)
     - [Coordinate](#onos-ransim-types-Coordinate)
     - [CoverageBoundary](#onos-ransim-types-CoverageBoundary)
     - [EventA3Params](#onos-ransim-types-EventA3Params)
     - [Grid](#onos-ransim-types-Grid)
+    - [GridPointsEntry](#onos-ransim-types-GridPointsEntry)
     - [Guami](#onos-ransim-types-Guami)
+    - [InterferingBeamsEntry](#onos-ransim-types-InterferingBeamsEntry)
     - [MapLayout](#onos-ransim-types-MapLayout)
     - [MeasurementParams](#onos-ransim-types-MeasurementParams)
     - [MeasurementParams.NcellIndividualOffsetsEntry](#onos-ransim-types-MeasurementParams-NcellIndividualOffsetsEntry)
     - [Node](#onos-ransim-types-Node)
     - [Route](#onos-ransim-types-Route)
-    - [Sector](#onos-ransim-types-Sector)
+    - [ShadowingMapEntry](#onos-ransim-types-ShadowingMapEntry)
     - [UECell](#onos-ransim-types-UECell)
     - [Ue](#onos-ransim-types-Ue)
     - [UeIdentity](#onos-ransim-types-UeIdentity)
@@ -50,11 +56,45 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| beam_index | [int32](#int32) |  |  |
+| azimuth | [double](#double) |  |  |
+| tilt | [double](#double) |  |  |
 | h3db_angle | [double](#double) |  |  |
 | v3db_angle | [double](#double) |  |  |
 | max_gain | [double](#double) |  |  |
-| max_attenuation_db | [double](#double) |  |  |
-| v_side_lobe_attenuation_db | [double](#double) |  |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-BeamCoverageEntry"></a>
+
+### BeamCoverageEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| beam_id | [BeamID](#onos-ransim-types-BeamID) |  |  |
+| coverage_boundaries | [CoverageBoundary](#onos-ransim-types-CoverageBoundary) | repeated |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-BeamID"></a>
+
+### BeamID
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ncgi | [uint64](#uint64) |  |  |
+| carrier_index | [int32](#int32) |  |  |
+| beam_index | [int32](#int32) |  |  |
 
 
 
@@ -79,6 +119,22 @@
 
 
 
+<a name="onos-ransim-types-BoundingBoxEntry"></a>
+
+### BoundingBoxEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| beam_id | [BeamID](#onos-ransim-types-BeamID) |  |  |
+| bounding_box | [BoundingBox](#onos-ransim-types-BoundingBox) |  |  |
+
+
+
+
+
+
 <a name="onos-ransim-types-Bwp"></a>
 
 ### Bwp
@@ -91,6 +147,31 @@
 | scs | [int32](#int32) |  |  |
 | number_of_rbs | [int32](#int32) |  |  |
 | downlink | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-Carrier"></a>
+
+### Carrier
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| beams | [Beam](#onos-ransim-types-Beam) | repeated |  |
+| center | [Coordinate](#onos-ransim-types-Coordinate) |  |  |
+| height | [int32](#int32) |  |  |
+| arfcn_dl | [uint32](#uint32) |  |  |
+| arfcn_ul | [uint32](#uint32) |  |  |
+| bs_channel_bw_dl | [uint32](#uint32) |  |  |
+| bs_channel_bw_ul | [uint32](#uint32) |  |  |
+| tx_power_db | [double](#double) |  |  |
+| v_side_lobe_attenuation_db | [double](#double) |  |  |
+| environment | [string](#string) |  |  |
+| los | [bool](#bool) |  |  |
 
 
 
@@ -114,6 +195,10 @@
 | pci | [uint32](#uint32) |  |  |
 | earfcn | [uint32](#uint32) |  |  |
 | cell_type | [CellType](#onos-ransim-types-CellType) |  |  |
+| arfcn_dl | [uint32](#uint32) |  |  |
+| arfcn_ul | [uint32](#uint32) |  |  |
+| bs_channel_bw_dl | [uint32](#uint32) |  |  |
+| bs_channel_bw_ul | [uint32](#uint32) |  |  |
 | bwps | [Cell.BwpsEntry](#onos-ransim-types-Cell-BwpsEntry) | repeated |  |
 | rrc_idle_count | [uint32](#uint32) |  |  |
 | rrc_connected_count | [uint32](#uint32) |  |  |
@@ -121,6 +206,7 @@
 | cached_states | [Cell.CachedStatesEntry](#onos-ransim-types-Cell-CachedStatesEntry) | repeated |  |
 | current_state_hash | [string](#string) |  |  |
 | resource_alloc_scheme | [string](#string) |  |  |
+| beam_interference_mapping | [InterferingBeamsEntry](#onos-ransim-types-InterferingBeamsEntry) | repeated |  |
 | grid | [Grid](#onos-ransim-types-Grid) |  |  |
 
 
@@ -153,7 +239,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [CellSignalInfo](#onos-ransim-types-CellSignalInfo) |  |  |
+| value | [CellCoverageInfo](#onos-ransim-types-CellCoverageInfo) |  |  |
 
 
 
@@ -168,26 +254,23 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| tx_power_db | [double](#double) |  |  |
-| sector | [Sector](#onos-ransim-types-Sector) |  |  |
-| channel | [Channel](#onos-ransim-types-Channel) |  |  |
-| beam | [Beam](#onos-ransim-types-Beam) |  |  |
+| carriers | [Carrier](#onos-ransim-types-Carrier) | repeated |  |
 
 
 
 
 
 
-<a name="onos-ransim-types-CellSignalInfo"></a>
+<a name="onos-ransim-types-CellCoverageInfo"></a>
 
-### CellSignalInfo
+### CellCoverageInfo
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| rp_coverage_boundaries | [CoverageBoundary](#onos-ransim-types-CoverageBoundary) | repeated |  |
-| coverage_boundaries | [CoverageBoundary](#onos-ransim-types-CoverageBoundary) | repeated |  |
+| rp_coverage_boundaries | [BeamCoverageEntry](#onos-ransim-types-BeamCoverageEntry) | repeated |  |
+| coverage_boundaries | [BeamCoverageEntry](#onos-ransim-types-BeamCoverageEntry) | repeated |  |
 
 
 
@@ -272,9 +355,25 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| shadowing_map | [double](#double) | repeated |  |
+| shadowing_maps | [ShadowingMapEntry](#onos-ransim-types-ShadowingMapEntry) | repeated |  |
+| grid_points_maps | [GridPointsEntry](#onos-ransim-types-GridPointsEntry) | repeated |  |
+| bounding_boxes | [BoundingBoxEntry](#onos-ransim-types-BoundingBoxEntry) | repeated |  |
+
+
+
+
+
+
+<a name="onos-ransim-types-GridPointsEntry"></a>
+
+### GridPointsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| beam_id | [BeamID](#onos-ransim-types-BeamID) |  |  |
 | grid_points | [Coordinate](#onos-ransim-types-Coordinate) | repeated |  |
-| bounding_box | [BoundingBox](#onos-ransim-types-BoundingBox) |  |  |
 
 
 
@@ -293,6 +392,22 @@
 | amf_region_id | [uint32](#uint32) |  | 8 bits |
 | amf_set_id | [uint32](#uint32) |  | 10 bits |
 | amf_pointer | [uint32](#uint32) |  | 6 bits |
+
+
+
+
+
+
+<a name="onos-ransim-types-InterferingBeamsEntry"></a>
+
+### InterferingBeamsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| beam_id | [BeamID](#onos-ransim-types-BeamID) |  |  |
+| interfering_beams | [BeamID](#onos-ransim-types-BeamID) | repeated |  |
 
 
 
@@ -398,19 +513,16 @@
 
 
 
-<a name="onos-ransim-types-Sector"></a>
+<a name="onos-ransim-types-ShadowingMapEntry"></a>
 
-### Sector
+### ShadowingMapEntry
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| center | [Coordinate](#onos-ransim-types-Coordinate) |  |  |
-| azimuth | [double](#double) |  |  |
-| arc | [int32](#int32) |  |  |
-| tilt | [double](#double) |  |  |
-| height | [int32](#int32) |  |  |
+| beam_id | [BeamID](#onos-ransim-types-BeamID) |  |  |
+| shadowing_map | [double](#double) | repeated |  |
 
 
 
@@ -427,6 +539,7 @@
 | ----- | ---- | ----- | ----------- |
 | id | [uint64](#uint64) |  |  |
 | ncgi | [uint64](#uint64) |  |  |
+| beam_id | [BeamID](#onos-ransim-types-BeamID) |  |  |
 | rsrp | [double](#double) |  |  |
 | rsrq | [double](#double) |  |  |
 | sinr | [double](#double) |  |  |
